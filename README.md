@@ -6,5 +6,6 @@ Doing ... sort
 - Gladys Toledo-Rodriguez
 
 ## Team 
-Doing ... sort
-- 
+Doing .. sort
+- Christopher Dharma
+- Max
