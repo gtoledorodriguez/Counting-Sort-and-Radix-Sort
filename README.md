@@ -5,7 +5,7 @@ Doing ... sort
 - Grace Arnold
 - Gladys Toledo-Rodriguez
 
-## Team 
+## Team Kawaii Koding
 Doing .. sort
 - Christopher Dharma
-- Max
+- Max Buffo
