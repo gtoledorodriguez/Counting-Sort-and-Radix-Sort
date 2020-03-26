@@ -26,12 +26,6 @@ public class RadixSort {
 		
 		int output[] = new int[n];
 		
-		int x = 0;
-		while(x<100){
-			counting[x] = 0;
-			x++;
-		}
-		
 		int i;
 		
         for (i = 0; i < n; i++) { //counts the number of occurrences in counting[]
