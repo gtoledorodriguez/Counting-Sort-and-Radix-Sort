@@ -225,7 +225,7 @@ class Main {
 					if (result != null) {
 						// if result is able to be parsed, then parse
 						int resultNum = Integer.parseInt(result);
-						if (resultNum > 0 && resultNum < 250) {
+						if (resultNum > 0 && resultNum < 100) {
 							// create new array of size resultNum
 							randData = new int[resultNum];
 							// populate array with random numbers
@@ -240,7 +240,7 @@ class Main {
 						} else {
 							// number too small or too big
 							JOptionPane.showMessageDialog(frame,
-									"Please choose a number greater than 0 and less than 250!");
+									"Please choose a number greater than 0 and less than 100!");
 						}
 					}
 					// Otherwise, they cancelled, and nothing happens
