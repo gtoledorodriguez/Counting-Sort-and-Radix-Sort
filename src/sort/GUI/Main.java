@@ -149,7 +149,7 @@ class Main {
 		countingTextArea.append("Sorted array: " + Arrays.toString(output) + "\n\n");
 	}
 
-	private static int getMax(int arr[], int n) {
+	private static int getMax(int arr[], int n) { //Gets the max value in array
 		int max = arr[0];
 		for (int i = 1; i < n; i++) {
 			if (arr[i] > max) {
@@ -159,7 +159,7 @@ class Main {
 		return max;
 	}
 
-	private static void radixCountSort(int arr[], int n, int exp) {
+	private static void radixCountSort(int arr[], int n, int exp) {// Does counting sort on the array according to the digit represented by exp
 		// Can not use the one from the other file because
 		// we need 3 inputs
 		// Will use the code from CountingSort as a base
@@ -170,21 +170,21 @@ class Main {
 
 		int i;
 
-		for (i = 0; i < n; i++) {
+		for (i = 0; i < n; i++) { //counts the number of occurrences in counting[]
 			counting[(arr[i] / exp) % 10]++;
 		}
 
-		for (i = 1; i < 10; i++) {
+		for (i = 1; i < 10; i++) { // count will contain the real position of the digit
 			counting[i] += counting[i - 1];
 		}
 
-		for (i = n - 1; i >= 0; i--) {
+		for (i = n - 1; i >= 0; i--) { //Builds the output array
 			output[counting[(arr[i] / exp) % 10] - 1] = arr[i];
 			counting[(arr[i] / exp) % 10]--;
 		}
 
 		for (int b = 0; b < n; ++b) { // put sorted output array back into passed array
-			arr[b] = output[b];
+			arr[b] = output[b];		  // contains sorted numbers according to current digit
 		}
 
 	}
@@ -193,8 +193,8 @@ class Main {
 		int n = arr.length;
 		int max = getMax(arr, n); // Used to find the max # to know how many digits it contains
 		radixTextArea.append("Max: " + max + "\n");
-		for (int exp = 1; max / exp > 0; exp *= 10) {
-			radixCountSort(arr, n, exp);
+		for (int exp = 1; max / exp > 0; exp *= 10) { // Do counting sort for every digit
+			radixCountSort(arr, n, exp); 			  // exp is 10^i where i the the current digit number
 			radixTextArea.append(Arrays.toString(arr) + "\n\n");
 		}
 
