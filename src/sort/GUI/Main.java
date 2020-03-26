@@ -115,22 +115,28 @@ class Main {
 	private static void countingSort(int arr[]) {
 		int n = arr.length;
 
-		int counting[] = new int[100];
+		int counting[] = new int[100]; // array for counting variables
 
-		int output[] = new int[n];
+		int output[] = new int[n]; // array that will be the sorted array
+
+		int x = 0;
+		while (x < 100) { // initializing array values to zero
+			counting[x] = 0;
+			x++;
+		}
 
 		int i = 0;
-		while (i < n) {
+		while (i < n) { // stores count of all numbers
 			++counting[arr[i]];
 			i++;
 		}
 
-		for (int c = 1; c < 100; ++c) {
+		for (int c = 1; c < 100; ++c) { // changing count to actual position
 			counting[c] += counting[c - 1];
 			countingTextArea.append("Counting array: " + Arrays.toString(counting) + "\n\n");
 		}
 
-		for (int v = 0; v < n; ++v) {
+		for (int v = 0; v < n; ++v) { // filling values of output array
 			output[counting[arr[v]] - 1] = arr[v];
 			--counting[arr[v]];
 			countingTextArea.append("Counting array: " + Arrays.toString(counting) + "\n\n");
@@ -141,7 +147,6 @@ class Main {
 		}
 
 		countingTextArea.append("Sorted array: " + Arrays.toString(output) + "\n\n");
-
 	}
 
 	private static int getMax(int arr[], int n) {
