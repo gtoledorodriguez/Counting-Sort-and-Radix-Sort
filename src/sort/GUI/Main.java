@@ -31,6 +31,7 @@ class Main {
 	private static JScrollPane countingScrollPane;
 	private static JTextArea radixTextArea; // textArea to show radix sort
 	private static JScrollPane radixScrollPane;
+
 	// footer object declarations
 	private static JPanel optionsPanel;
 	private static JButton randomizeNumbersBtn; // create new random array of ints
@@ -118,12 +119,6 @@ class Main {
 
 		int output[] = new int[n];
 
-		int x = 0;
-		while (x < 100) {
-			counting[x] = 0;
-			x++;
-		}
-
 		int i = 0;
 		while (i < n) {
 			++counting[arr[i]];
@@ -132,16 +127,20 @@ class Main {
 
 		for (int c = 1; c < 100; ++c) {
 			counting[c] += counting[c - 1];
+			countingTextArea.append("Counting array: " + Arrays.toString(counting) + "\n\n");
 		}
 
 		for (int v = 0; v < n; ++v) {
 			output[counting[arr[v]] - 1] = arr[v];
 			--counting[arr[v]];
+			countingTextArea.append("Counting array: " + Arrays.toString(counting) + "\n\n");
 		}
 
 		for (int b = 0; b < n; ++b) { // put sorted output array back into passed array
 			arr[b] = output[b];
 		}
+
+		countingTextArea.append("Sorted array: " + Arrays.toString(output) + "\n\n");
 
 	}
 
@@ -155,19 +154,14 @@ class Main {
 		return max;
 	}
 
-	private static void radixCountSort(int arr[], int n, int exp) { // Can not use the one from the other file because we
-																// need 3 inputs
+	private static void radixCountSort(int arr[], int n, int exp) {
+		// Can not use the one from the other file because
+		// we need 3 inputs
 		// Will use the code from CountingSort as a base
 
 		int counting[] = new int[100];
 
 		int output[] = new int[n];
-
-		int x = 0;
-		while (x < 100) {
-			counting[x] = 0;
-			x++;
-		}
 
 		int i;
 
@@ -193,10 +187,13 @@ class Main {
 	private static void radixSort(int[] arr) {
 		int n = arr.length;
 		int max = getMax(arr, n); // Used to find the max # to know how many digits it contains
-
+		radixTextArea.append("Max: " + max + "\n");
 		for (int exp = 1; max / exp > 0; exp *= 10) {
 			radixCountSort(arr, n, exp);
+			radixTextArea.append(Arrays.toString(arr) + "\n\n");
 		}
+
+		radixTextArea.append("Sorted Array: " + Arrays.toString(arr) + "\n\n");
 	}
 
 	public static void main(String[] args) {
@@ -254,7 +251,8 @@ class Main {
 					System.out.println("Sort button pressed");
 					// clears text areas for new text
 					countingTextArea.setText("Counting Sort: \n\n");
-					radixTextArea.setText("Quick Sort: \n\n");
+					radixTextArea.setText("Radix Sort: \n\n");
+
 					// counting sort called
 					// starts timing counting sort
 					long startTime = System.nanoTime();
