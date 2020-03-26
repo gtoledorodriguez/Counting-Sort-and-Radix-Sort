@@ -145,9 +145,59 @@ class Main {
 
 	}
 
-	/*
-	 * Insert Radix Sort Here
-	 */
+	private static int getMax(int arr[], int n) {
+		int max = arr[0];
+		for (int i = 1; i < n; i++) {
+			if (arr[i] > max) {
+				max = arr[i];
+			}
+		}
+		return max;
+	}
+
+	private static void radixCountSort(int arr[], int n, int exp) { // Can not use the one from the other file because we
+																// need 3 inputs
+		// Will use the code from CountingSort as a base
+
+		int counting[] = new int[100];
+
+		int output[] = new int[n];
+
+		int x = 0;
+		while (x < 100) {
+			counting[x] = 0;
+			x++;
+		}
+
+		int i;
+
+		for (i = 0; i < n; i++) {
+			counting[(arr[i] / exp) % 10]++;
+		}
+
+		for (i = 1; i < 10; i++) {
+			counting[i] += counting[i - 1];
+		}
+
+		for (i = n - 1; i >= 0; i--) {
+			output[counting[(arr[i] / exp) % 10] - 1] = arr[i];
+			counting[(arr[i] / exp) % 10]--;
+		}
+
+		for (int b = 0; b < n; ++b) { // put sorted output array back into passed array
+			arr[b] = output[b];
+		}
+
+	}
+
+	private static void radixSort(int[] arr) {
+		int n = arr.length;
+		int max = getMax(arr, n); // Used to find the max # to know how many digits it contains
+
+		for (int exp = 1; max / exp > 0; exp *= 10) {
+			radixCountSort(arr, n, exp);
+		}
+	}
 
 	public static void main(String[] args) {
 		// calls initializeGUI to initialize the window and components
@@ -222,7 +272,7 @@ class Main {
 					startTime = System.nanoTime();
 					// new timer alignment
 					TimeUnit.SECONDS.sleep(1);
-					radixSort(Arrays.copyOf(randData, randData.length), 0, randData.length - 1);
+					radixSort(Arrays.copyOf(randData, randData.length));
 					// stops timer
 					endTime = System.nanoTime();
 					// calculates elapsed time for radix sort to finish
