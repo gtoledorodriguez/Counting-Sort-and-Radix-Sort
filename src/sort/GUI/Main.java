@@ -149,7 +149,7 @@ class Main {
 		countingTextArea.append("Sorted array: " + Arrays.toString(output) + "\n\n");
 	}
 
-	private static int getMax(int arr[], int n) { //Gets the max value in array
+	private static int getMax(int arr[], int n) { // Gets the max value in array
 		int max = arr[0];
 		for (int i = 1; i < n; i++) {
 			if (arr[i] > max) {
@@ -159,7 +159,8 @@ class Main {
 		return max;
 	}
 
-	private static void radixCountSort(int arr[], int n, int exp) {// Does counting sort on the array according to the digit represented by exp
+	private static void radixCountSort(int arr[], int n, int exp) {// Does counting sort on the array according to the
+																	// digit represented by exp
 		// Can not use the one from the other file because
 		// we need 3 inputs
 		// Will use the code from CountingSort as a base
@@ -170,7 +171,7 @@ class Main {
 
 		int i;
 
-		for (i = 0; i < n; i++) { //counts the number of occurrences in counting[]
+		for (i = 0; i < n; i++) { // counts the number of occurrences in counting[]
 			counting[(arr[i] / exp) % 10]++;
 		}
 
@@ -178,13 +179,13 @@ class Main {
 			counting[i] += counting[i - 1];
 		}
 
-		for (i = n - 1; i >= 0; i--) { //Builds the output array
+		for (i = n - 1; i >= 0; i--) { // Builds the output array
 			output[counting[(arr[i] / exp) % 10] - 1] = arr[i];
 			counting[(arr[i] / exp) % 10]--;
 		}
 
 		for (int b = 0; b < n; ++b) { // put sorted output array back into passed array
-			arr[b] = output[b];		  // contains sorted numbers according to current digit
+			arr[b] = output[b]; // contains sorted numbers according to current digit
 		}
 
 	}
@@ -194,7 +195,7 @@ class Main {
 		int max = getMax(arr, n); // Used to find the max # to know how many digits it contains
 		radixTextArea.append("Max: " + max + "\n");
 		for (int exp = 1; max / exp > 0; exp *= 10) { // Do counting sort for every digit
-			radixCountSort(arr, n, exp); 			  // exp is 10^i where i the the current digit number
+			radixCountSort(arr, n, exp); // exp is 10^i where i the the current digit number
 			radixTextArea.append(Arrays.toString(arr) + "\n\n");
 		}
 
@@ -230,7 +231,7 @@ class Main {
 					if (result != null) {
 						// if result is able to be parsed, then parse
 						int resultNum = Integer.parseInt(result);
-						if (resultNum > 0 && resultNum < 100) {
+						if (resultNum > 0 && resultNum < 101) {
 							// create new array of size resultNum
 							randData = new int[resultNum];
 							// populate array with random numbers
@@ -245,7 +246,7 @@ class Main {
 						} else {
 							// number too small or too big
 							JOptionPane.showMessageDialog(frame,
-									"Please choose a number greater than 0 and less than 100!");
+									"Please choose a number greater than 0 and less than 101!");
 						}
 					}
 					// Otherwise, they cancelled, and nothing happens
